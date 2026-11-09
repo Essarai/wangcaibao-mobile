@@ -68,3 +68,20 @@ html{-webkit-text-size-adjust:100%}
 .banner-icon{font-size:30px;line-height:32px;flex-basis:30px}
 .banner-text{font-size:16px;line-height:25px;font-weight:700;white-space:normal}
 .banner-arrow{font-size:32px;line-height:32px;flex-basis:24px}
+/* Updated prototype: floating home navigation and analysis visualization. */
+.phone.home>.body{padding-bottom:108px;flex:1;min-height:0}
+.bottom-nav{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);display:flex;width:276px;height:62px;padding:4px;border:1px solid #fff;background:#ffffffeb;backdrop-filter:blur(20px);border-radius:40px;box-shadow:0 7px 20px #0002;z-index:10}
+.bottom-nav button{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border-radius:30px;font-size:10px}
+.bottom-nav button[aria-current=page]{background:#f2f2f2;color:#f03e3e;font-weight:600}
+.bottom-nav img{width:24px;height:24px}
+.account{padding-top:18px}.account article{text-align:center}.account-avatar{width:90px;height:90px;object-fit:contain}.account-item{display:flex;width:100%;justify-content:space-between;background:#fff;border-radius:12px;padding:20px;margin-bottom:10px;text-align:left;font-size:15px}.account>small{display:block;text-align:center;margin-top:22px}
+.comparison-bar{margin:18px 0}.comparison-bar .row{font-size:14px}.comparison-bar b{font-weight:500}.track{height:5px;background:#eaeaea;border-radius:5px;margin-top:8px;overflow:hidden}.track>span{display:block;height:100%;background:#ff8800;border-radius:5px}.blue .track>span{background:#387dff}
+.answer .explanation{background:#f1f1f1;border-radius:8px;padding:10px;font-size:13px;line-height:1.7;color:#777;margin:16px 0}
+.comparison-conclusion{border-radius:9px;background:#e2eaff;padding:14px;margin-top:18px;font-size:14px}.answer .comparison-conclusion p{font-size:14px;margin:10px 0 0;line-height:1.7}
+.linechart{width:100%;margin:8px 0}.linechart svg{display:block;width:100%;height:auto;overflow:visible}.linechart g[role=button]{cursor:pointer}.chart-readout{text-align:center;font-size:12px;background:#fff1e5;border-radius:8px;padding:8px;color:#a75b16}
+.chips button{display:flex;align-items:center;gap:4px;flex-shrink:0}.chips button>span{font-size:15px}.followups button{background:white;box-shadow:0 1px 3px #00000004}
+@media(max-width:600px),(display-mode:standalone){.bottom-nav{bottom:calc(env(safe-area-inset-bottom,0px) + 12px)}.phone.home>.body{padding-bottom:100px}}
+.phone.chat{background:#f2f2f2}
+.phone.chat:before{height:180px;background:linear-gradient(160deg,#ffded8 0%,#ffebe8 35%,#f2f2f2 90%)}
+.bottom-nav button[aria-current=page] img{filter:brightness(0) saturate(100%) invert(38%) sepia(94%) saturate(3271%) hue-rotate(348deg) brightness(103%) contrast(103%)}
+.answer-money{font-weight:700;text-decoration:underline;text-decoration-color:#f1a5a5;text-decoration-thickness:2px;text-underline-offset:2px}.answer-growth{font-weight:700}

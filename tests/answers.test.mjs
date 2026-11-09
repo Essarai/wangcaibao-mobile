@@ -1,7 +1,7 @@
 import {readFileSync} from 'node:fs';
 import {transformWithEsbuild} from 'vite';
 import assert from 'node:assert/strict';
-const {code}=await transformWithEsbuild(readFileSync(new URL('../app/answers.tsx',import.meta.url),'utf8'),'answers.tsx',{loader:'tsx',jsx:'automatic'});
+const {code}=await transformWithEsbuild(readFileSync(new URL('../app/answers.tsx',import.meta.url),'utf8').replace("import TrendChart from './TrendChart';",''),'answers.tsx',{loader:'tsx',jsx:'automatic'});
 const model=await import('data:text/javascript;base64,'+Buffer.from(code.replace(/^import .*jsx-runtime.*;$/mg,'')).toString('base64'));
 for(const [q,kind] of [['今天收款表现怎么样','summary'],['收款趋势','trend'],['今天哪个时段收款最多','time'],['经营对比','compare'],['高峰时段如何改善','advice'],['天气怎么样','unknown']])assert.equal(model.classify(q),kind);
 assert.equal(model.classify('继续详细分析','time'),'time');
