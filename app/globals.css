@@ -107,6 +107,6 @@ html{-webkit-text-size-adjust:100%}
 
 /* Anchor tabs to the actual viewport, independently of the padded app shell. */
 @media(max-width:600px),(display-mode:standalone){
- .phone.home .bottom-nav{position:fixed;left:50%;bottom:max(12px,env(safe-area-inset-bottom,0px));z-index:40}
+ .phone.home .bottom-nav{position:fixed;left:50%;bottom:max(8px,calc(env(safe-area-inset-bottom,0px) - 18px));z-index:40}
 }
 .viewport-check{position:fixed;top:100px;left:12px;z-index:1000;padding:12px;background:#ffffffed;color:#222;border:1px solid #ccc;border-radius:10px;font:12px/1.5 monospace;pointer-events:none;box-shadow:0 5px 20px #0002}
