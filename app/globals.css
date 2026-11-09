@@ -97,3 +97,10 @@ html{-webkit-text-size-adjust:100%}
 .bottom-nav button[aria-current=page]{background:#f2f2f2;color:#ff2235}
 .bottom-nav img{width:24px;height:24px;object-fit:contain}
 @media(max-width:600px),(display-mode:standalone){.bottom-nav{bottom:max(20px,env(safe-area-inset-bottom,0px))}}
+
+/* Fill the installed app viewport; reserve the home gesture area only once. */
+@media(max-width:600px),(display-mode:standalone){
+ .bottom-nav{bottom:max(12px,env(safe-area-inset-bottom,0px))}
+ .phone.home>.body{padding-bottom:92px}
+ html,body,#root{background:#f5f5f5}
+}
