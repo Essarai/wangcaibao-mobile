@@ -63,3 +63,8 @@ html{-webkit-text-size-adjust:100%}
 .chart>div{flex:1;min-width:0;width:auto}
 .chart>div>div{max-width:26px;margin:4px auto}
 .chart small{display:block;height:16px;line-height:16px}
+/* Keep the insight banner legible at the phone's native CSS pixel size. */
+.banner{gap:10px;padding-top:16px;padding-bottom:42px;align-items:center}
+.banner-icon{font-size:30px;line-height:32px;flex-basis:30px}
+.banner-text{font-size:16px;line-height:25px;font-weight:700;white-space:normal}
+.banner-arrow{font-size:32px;line-height:32px;flex-basis:24px}
