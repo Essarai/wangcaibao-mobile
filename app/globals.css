@@ -85,3 +85,9 @@ html{-webkit-text-size-adjust:100%}
 .phone.chat:before{height:180px;background:linear-gradient(160deg,#ffded8 0%,#ffebe8 35%,#f2f2f2 90%)}
 .bottom-nav button[aria-current=page] img{filter:brightness(0) saturate(100%) invert(38%) sepia(94%) saturate(3271%) hue-rotate(348deg) brightness(103%) contrast(103%)}
 .answer-money{font-weight:700;text-decoration:underline;text-decoration-color:#f1a5a5;text-decoration-thickness:2px;text-underline-offset:2px}.answer-growth{font-weight:700}
+
+.banner{gap:6px;padding-left:12px;padding-right:12px}
+.banner-icon{flex-basis:26px;font-size:28px}
+.banner-text{white-space:nowrap;font-size:14px;line-height:25px;letter-spacing:-.25px}
+.banner-arrow{flex-basis:18px;font-size:30px}
+@media(max-width:380px){.banner-text{font-size:12px;letter-spacing:-.3px}.banner{gap:4px}}
