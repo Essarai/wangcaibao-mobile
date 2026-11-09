@@ -18,3 +18,9 @@ npm run dev
 业务数据、AI 回答、登录、资料识别、认证审核和设备绑定均为模拟。无需 API 密钥。请勿输入真实身份或银行卡信息。对话仅保存在当前页面内存中，刷新会重置。
 
 原稿内部分数字存在不一致，首页保留设计稿显示值，AI 分析使用独立的演示数据。该版本没有连接真实收款和认证服务。
+
+## 手机桌面 App
+
+访问 https://essarai.github.io/wangcaibao-mobile/ ，在 iPhone Safari 中选择「分享 → 添加到主屏幕」，如出现「作为网页 App 打开」请开启。从桌面图标启动将隐藏浏览器地址栏。手机适配真实屏幕和安全区域，电脑端保留 iPhone 模拟机身。
+
+GitHub Actions 在推送 main 后自动构建并部署 GitHub Pages。手动构建使用 `npm run build:pwa`，输出为 `dist-pwa/`。需要联网访问，本版本不提供离线缓存。
