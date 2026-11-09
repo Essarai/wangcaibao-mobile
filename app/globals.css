@@ -26,3 +26,27 @@ main{gap:70px;padding:20px;min-height:100dvh;height:100dvh;overflow:hidden}
  .body,.conversation,.welcomecontent{min-height:0;overscroll-behavior-y:contain}
  input{font-size:16px}
 }
+/* iPhone 16 Pro: keep native safe areas and resize the chat above the keyboard. */
+html{-webkit-text-size-adjust:100%}
+@media (max-width:600px), (display-mode:standalone){
+ main{position:fixed;top:var(--visible-top,0px);left:0;height:var(--visible-height,100dvh);min-height:0}
+ .device .phone{padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
+ .phone header,.chathead,.back{flex-shrink:0}
+ .body{flex:1;min-height:0}
+ .conversation{overflow-x:hidden;overflow-y:auto;overflow-wrap:anywhere}
+ .loginbox{overflow:auto;min-height:0}
+ .chips{flex-shrink:0}
+ .chips button{min-height:40px}
+ .drawer{padding-top:max(24px,env(safe-area-inset-top));padding-bottom:max(24px,env(safe-area-inset-bottom));overflow:auto}
+ .row{gap:8px}
+ .metrics>div{min-width:0}
+ .portraits button{min-width:0}
+ .welcomecontent h2{font-size:clamp(20px,5.7vw,23px)}
+ .keyboard-open .device .phone{padding-bottom:0}
+ .keyboard-open footer{padding-bottom:8px}
+ .keyboard-open footer>small{display:none}
+}
+@media (max-height:500px) and (orientation:landscape){
+ .hero{height:80px}.hero img{height:100px}
+ .empty{padding-top:0}.empty>img{width:65px}
+}
