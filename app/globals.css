@@ -158,3 +158,9 @@ form .voice-button{background:transparent;width:27px;height:27px;align-self:cent
 .chips button{width:98px;flex:0 0 98px;height:34px;min-height:34px;padding:8px 16px;justify-content:center}
 footer form{height:52px;padding:12px 16px 12px 24px;align-items:center}
 footer>small{margin-top:8px;font-size:11px;line-height:15px}
+
+/* Figma 13:335–355: 10px rank column, Douyin Sans Bold 16/20. */
+.merchant-rank{align-items:center;height:45px;padding:12px 0}
+.merchant-rank-label{display:flex;align-items:center;gap:8px;min-width:0}
+.rank-number{display:block;flex:0 0 10px;width:10px;font-family:'Douyin Sans',sans-serif;font-size:16px;font-weight:700;line-height:20px;font-synthesis:none;letter-spacing:0}
+.rank-number-1{color:#b57b00}.rank-number-2{color:#5485c7}.rank-number-3{color:#cf7713}.rank-number-4,.rank-number-5{color:#a7a7a7}
