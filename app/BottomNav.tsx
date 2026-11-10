@@ -1,0 +1,4 @@
+'use client';
+import {useEffect,useState} from 'react';
+import {createPortal} from 'react-dom';
+export default function BottomNav({page,onChange,assets}:{page:string;onChange:(page:string)=>void;assets:string}){const [mobile,M]=useState(false);useEffect(()=>{const media=matchMedia('(max-width:600px), (display-mode:standalone)');const sync=()=>M(media.matches);sync();media.addEventListener('change',sync);return()=>media.removeEventListener('change',sync)},[]);const nav=<nav className={'bottom-nav'+(mobile?' mobile-tab-bar':'')} aria-label="主导航">{[{name:'首页',icon:'nav-13-370.svg',target:'home'},{name:'Ai助手',icon:'nav-13-376.svg',target:'chat'},{name:'我的',icon:'nav-13-380.svg',target:'me'}].map(item=><button key={item.name} aria-current={page===item.target?'page':undefined} onClick={()=>onChange(item.target)}><img src={assets+item.icon} alt=""/><span>{item.name}</span></button>)}</nav>;return mobile?createPortal(nav,document.body):nav}

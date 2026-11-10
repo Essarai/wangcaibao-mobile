@@ -13,7 +13,7 @@ main{gap:70px;padding:20px;min-height:100dvh;height:100dvh;overflow:hidden}
 /* Real phones use their own screen, system status bar and gesture indicator. */
 @media (max-width:600px), (display-mode:standalone){
  html,body,#root{width:100%;height:100%;overflow:hidden;background:#f9eeed}
- main{width:100%;height:100dvh;padding:0;display:block;overflow:hidden}
+ main{width:100%;padding:0;display:block;overflow:hidden}
  .desktop{display:none}
  .device-space{width:100%!important;height:100%!important}
  .device{position:relative;width:100%;height:100%;padding:0;border-radius:0;background:transparent;box-shadow:none;transform:none!important}
@@ -29,7 +29,7 @@ main{gap:70px;padding:20px;min-height:100dvh;height:100dvh;overflow:hidden}
 /* iPhone 16 Pro: keep native safe areas and resize the chat above the keyboard. */
 html{-webkit-text-size-adjust:100%}
 @media (max-width:600px), (display-mode:standalone){
- main{position:fixed;top:var(--visible-top,0px);left:0;height:var(--visible-height,100dvh);min-height:0}
+ main{position:fixed;min-height:0}
  .device .phone{padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
  .phone header,.chathead,.back{flex-shrink:0}
  .body{flex:1;min-height:0}
@@ -69,8 +69,8 @@ html{-webkit-text-size-adjust:100%}
 .banner-text{font-size:16px;line-height:25px;font-weight:700;white-space:normal}
 .banner-arrow{font-size:32px;line-height:32px;flex-basis:24px}
 /* Updated prototype: floating home navigation and analysis visualization. */
-.phone.home>.body{padding-bottom:108px;flex:1;min-height:0}
-.bottom-nav{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);display:flex;width:276px;height:62px;padding:4px;border:1px solid #fff;background:#ffffffeb;backdrop-filter:blur(20px);border-radius:40px;box-shadow:0 7px 20px #0002;z-index:10}
+.phone.home>.body{flex:1;min-height:0}
+.bottom-nav{display:flex;width:276px;height:62px;padding:4px;border:1px solid #fff;background:#ffffffeb;backdrop-filter:blur(20px);border-radius:40px;box-shadow:0 7px 20px #0002;}
 .bottom-nav button{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border-radius:30px;font-size:10px}
 .bottom-nav button[aria-current=page]{background:#f2f2f2;color:#f03e3e;font-weight:600}
 .bottom-nav img{width:24px;height:24px}
@@ -80,7 +80,7 @@ html{-webkit-text-size-adjust:100%}
 .comparison-conclusion{border-radius:9px;background:#e2eaff;padding:14px;margin-top:18px;font-size:14px}.answer .comparison-conclusion p{font-size:14px;margin:10px 0 0;line-height:1.7}
 .linechart{width:100%;margin:8px 0}.linechart svg{display:block;width:100%;height:auto;overflow:visible}.linechart g[role=button]{cursor:pointer}.chart-readout{text-align:center;font-size:12px;background:#fff1e5;border-radius:8px;padding:8px;color:#a75b16}
 .chips button{display:flex;align-items:center;gap:4px;flex-shrink:0}.chips button>span{font-size:15px}.followups button{background:white;box-shadow:0 1px 3px #00000004}
-@media(max-width:600px),(display-mode:standalone){.bottom-nav{bottom:calc(env(safe-area-inset-bottom,0px) + 12px)}.phone.home>.body{padding-bottom:100px}}
+
 .phone.chat{background:#f2f2f2}
 .phone.chat:before{height:180px;background:linear-gradient(160deg,#ffded8 0%,#ffebe8 35%,#f2f2f2 90%)}
 .bottom-nav button[aria-current=page] img{filter:brightness(0) saturate(100%) invert(38%) sepia(94%) saturate(3271%) hue-rotate(348deg) brightness(103%) contrast(103%)}
@@ -92,21 +92,37 @@ html{-webkit-text-size-adjust:100%}
 .banner-arrow{flex-basis:18px;font-size:30px}
 @media(max-width:380px){.banner-text{font-size:12px;letter-spacing:-.3px}.banner{gap:4px}}
 
-.bottom-nav{width:274px;height:62px;padding:4px;border:0;bottom:20px;background:rgba(255,255,255,.92);box-shadow:0 6px 24px #00000029;backdrop-filter:blur(24px)}
+.bottom-nav{width:274px;height:62px;padding:4px;border:0;background:rgba(255,255,255,.92);box-shadow:0 6px 24px #00000029;backdrop-filter:blur(24px)}
 .bottom-nav button{height:54px;gap:4px;padding:6px 0;font-size:10px;line-height:12px;font-weight:590}
 .bottom-nav button[aria-current=page]{background:#f2f2f2;color:#ff2235}
 .bottom-nav img{width:24px;height:24px;object-fit:contain}
-@media(max-width:600px),(display-mode:standalone){.bottom-nav{bottom:max(20px,env(safe-area-inset-bottom,0px))}}
+
 
 /* Fill the installed app viewport; reserve the home gesture area only once. */
 @media(max-width:600px),(display-mode:standalone){
- .bottom-nav{bottom:max(12px,env(safe-area-inset-bottom,0px))}
- .phone.home>.body{padding-bottom:92px}
+ 
+ 
  html,body,#root{background:#f5f5f5}
 }
 
 /* Anchor tabs to the actual viewport, independently of the padded app shell. */
 @media(max-width:600px),(display-mode:standalone){
- .phone.home .bottom-nav{position:fixed;left:50%;bottom:max(8px,calc(env(safe-area-inset-bottom,0px) - 18px));z-index:40}
+ .phone.home 
 }
 .viewport-check{position:fixed;top:100px;left:12px;z-index:1000;padding:12px;background:#ffffffed;color:#222;border:1px solid #ccc;border-radius:10px;font:12px/1.5 monospace;pointer-events:none;box-shadow:0 5px 20px #0002}
+
+/* One positioning contract: body portal + one native inset + 8px. */
+:root{--app-safe-bottom:env(safe-area-inset-bottom,0px);--tab-height:62px;--tab-gap:8px}
+.bottom-nav{position:absolute;left:50%;bottom:20px;transform:translateX(-50%);z-index:40}
+body>.mobile-tab-bar{position:fixed;left:50%;bottom:calc(var(--app-safe-bottom) + var(--tab-gap));transform:translateX(-50%);z-index:100}
+@media(max-width:600px),(display-mode:standalone){
+ html,body,#root{height:100%;min-height:100%;background:#f5f5f5}
+ body:before{content:'';position:fixed;inset:0;background:#f5f5f5;z-index:-1}
+ main{inset:0;width:100%;height:auto;min-height:0}
+ .device{transform:none!important;translate:none!important;scale:none!important;rotate:none!important;filter:none;perspective:none;contain:none;will-change:auto}
+ .device .phone.home{padding-bottom:0}
+ .phone.home>.body{padding-bottom:calc(var(--tab-height) + var(--tab-gap) + var(--app-safe-bottom) + 16px)}
+ .keyboard-open main{top:var(--visible-top,0px);bottom:auto;height:var(--visible-height)}
+}
+
+.viewport-check{pointer-events:auto}.viewport-check pre{margin:8px 0 0;font:inherit}.viewport-check button{font-size:12px}
