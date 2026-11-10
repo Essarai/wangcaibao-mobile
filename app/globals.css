@@ -192,3 +192,6 @@ footer>small{margin-top:8px;font-size:11px;line-height:15px}
 .phone.welcome .welcomecontent article h3{font-size:18px;line-height:25px;font-weight:800;margin:0 0 6px}
 .phone.welcome .welcomecontent article p{font-size:15px;line-height:21px;margin:0;color:rgba(0,0,0,.45)}
 .phone.welcome .welcomecontent>.primary{width:calc(100% + 12px);height:50px;min-height:50px;margin:23px -6px 0;padding:0 10px;font-size:17px;line-height:20px;border-radius:120px}
+
+/* Opaque foreground panel occludes the mascot below the original concave edge. */
+.phone.welcome .welcomecontent{background:linear-gradient(145deg,#fbf2f2 0%,#f9e2e4 45%,#f8f1f8 100%);mask:url('../public/assets/prototype/welcome-panel-mask.svg') center top/100% 702px no-repeat;-webkit-mask:url('../public/assets/prototype/welcome-panel-mask.svg') center top/100% 702px no-repeat}
