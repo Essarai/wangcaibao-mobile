@@ -1,3 +1,4 @@
-import {defineConfig} from 'vite';
+import {defineConfig,type Plugin} from 'vite';
 import react from '@vitejs/plugin-react';
-export default defineConfig({plugins:[react()],server:{watch:{usePolling:true,interval:300}},base:'./',build:{outDir:'dist-pwa'}});
+function resilientStyles():Plugin{return {name:'inline-app-styles',enforce:'post',generateBundle(_,bundle){const styles=Object.values(bundle).filter(x=>x.type==='asset'&&x.fileName.endsWith('.css'));const css=styles.map(x=>String(x.source)).join('\n');const html=bundle['index.html'];if(html?.type==='asset'){html.source=String(html.source).replace(/<link\b[^>]*rel="stylesheet"[^>]*>/g,'') .replace('</head>',`<style>${css}</style></head>`)}for(const name of ['index-Bta857eR.css','index-4o7Il6_P.css','index-SpYzYnSp.css','index-BDf1i8uh.css','index-C1FsMs3E.css','index-ByuqV4A8.css']){if(!bundle['assets/'+name])this.emitFile({type:'asset',fileName:'assets/'+name,source:css})}}}}
+export default defineConfig({plugins:[react(),resilientStyles()],server:{watch:{usePolling:true,interval:300}},base:'./',build:{outDir:'dist-pwa'}});
