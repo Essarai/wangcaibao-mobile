@@ -150,3 +150,7 @@ html.iphone-standalone.keyboard-open main{position:fixed;top:var(--visible-top,0
 .answer{padding:16px;border-radius:4px 18px 18px 18px;margin-bottom:12px}.conversation{padding:12px 20px}
 
 form .voice-button{background:transparent;width:27px;height:27px;align-self:center}.voice-button .send-icon{width:27px;height:27px;filter:none;transform:none}
+/* Preserve the native exported tab widths instead of squeezing the artwork. */
+.bottom-nav button{position:absolute;top:4px;width:92.667px;flex:none}
+.bottom-nav button:nth-of-type(1){left:4px;width:97px}.bottom-nav button:nth-of-type(2){left:90.667px}.bottom-nav button:nth-of-type(3){left:175.333px}
+.bottom-nav button:first-of-type img{width:97px}
