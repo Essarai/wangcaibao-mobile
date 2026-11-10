@@ -178,3 +178,17 @@ footer>small{margin-top:8px;font-size:11px;line-height:15px}
 
 /* Supplied 2x background artwork: 402×247 CSS pixels, no rotation or tint. */
 .phone:before,.phone.chat:before{top:0;left:0;right:0;width:100%;height:247px;opacity:1;transform:none;background-image:url('../public/assets/header-background.png');background-repeat:no-repeat;background-position:center top;background-size:100% 247px}
+/* Welcome frame 1:74 — measurements relative to the 402×874 artboard. */
+.phone.welcome{background:linear-gradient(145deg,#fbefed 0%,#f9e2e3 50%,#f8f0f6 100%)}
+.phone.welcome .back{position:absolute;left:9px;top:75px;height:28px;padding:0 7px;z-index:5;font-size:12px}
+.phone.welcome .hero{position:absolute;top:107px;left:calc(50% - 80px);width:160px;height:160px;flex:none;z-index:2}
+.phone.welcome .hero:before{content:'';position:absolute;top:-50px;left:-40px;width:240px;height:240px;background:url('../public/assets/prototype/welcome-1-83.svg') center/contain no-repeat;z-index:-1}
+.phone.welcome .hero .caishen-video{position:relative;top:0;width:160px;height:160px}
+.phone.welcome .welcomecontent{position:absolute;top:210px;left:0;bottom:0;width:100%;padding:50px 32px 34px;border-radius:0;background:url('../public/assets/prototype/welcome-1-101.svg') center top/100% 702px no-repeat;overflow:auto;scrollbar-width:none;z-index:3}
+.phone.welcome .welcomecontent h2{height:70px;margin:0;text-align:center;font-size:25px;line-height:35px;font-weight:800;letter-spacing:-.8px;white-space:nowrap;background:linear-gradient(135deg,#f18c40,#ef3032);background-clip:text;-webkit-background-clip:text;color:transparent}
+.phone.welcome .welcomecontent>p{font-size:16px;line-height:22px;margin:20px 0 12px;color:#666}
+.phone.welcome .welcomecontent article{height:113px;min-height:113px;padding:20px;margin:0 0 12px;border-radius:16px;background:rgba(255,255,255,.72);box-shadow:0 5px 8px #00000005}
+.phone.welcome .welcomecontent article:last-of-type{margin-bottom:0}
+.phone.welcome .welcomecontent article h3{font-size:18px;line-height:25px;font-weight:800;margin:0 0 6px}
+.phone.welcome .welcomecontent article p{font-size:15px;line-height:21px;margin:0;color:rgba(0,0,0,.45)}
+.phone.welcome .welcomecontent>.primary{width:calc(100% + 12px);height:50px;min-height:50px;margin:23px -6px 0;padding:0 10px;font-size:17px;line-height:20px;border-radius:120px}
