@@ -164,3 +164,12 @@ footer>small{margin-top:8px;font-size:11px;line-height:15px}
 .merchant-rank-label{display:flex;align-items:center;gap:8px;min-width:0}
 .rank-number{display:block;flex:0 0 10px;width:10px;font-family:'Douyin Sans',sans-serif;font-size:16px;font-weight:700;line-height:20px;font-synthesis:none;letter-spacing:0}
 .rank-number-1{color:#b57b00}.rank-number-2{color:#5485c7}.rank-number-3{color:#cf7713}.rank-number-4,.rank-number-5{color:#a7a7a7}
+/* Figma 13:246 / 13:255 / 13:256: fixed header and banner geometry. */
+.phone.home>header{height:83px;min-height:83px;flex:0 0 83px;padding:15px 16px}
+.phone.home>header h3{height:25px;line-height:25px;margin:0 0 8px}
+.phone.home>header .tag{display:inline-flex;align-items:center;height:20px;padding:0 6px;line-height:17px;vertical-align:top}
+.phone.home>header .profile{bottom:15px}
+.banner{height:76px;min-height:76px;max-height:76px;flex-shrink:0;padding:12px 16px 42px;align-items:flex-start;line-height:22px}
+.banner-text{height:22px;line-height:22px;display:block}
+.banner-icon,.banner-arrow{height:22px;min-height:22px;max-height:22px;align-self:flex-start}
+.phone.home .revenue{margin-top:-33px}
