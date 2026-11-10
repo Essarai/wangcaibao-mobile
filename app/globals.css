@@ -117,7 +117,7 @@ body>.mobile-tab-bar{position:fixed;left:50%;bottom:calc(var(--app-safe-bottom) 
  main{inset:0;width:100%;height:auto;min-height:0}
  .device{transform:none!important;translate:none!important;scale:none!important;rotate:none!important;filter:none;perspective:none;contain:none;will-change:auto}
  .device .phone.home{padding-bottom:0}
- .phone.home>.body{padding-bottom:calc(var(--tab-height) + var(--tab-gap) + var(--app-safe-bottom) + 16px)}
+ .phone.home>.body{padding-bottom:calc(var(--app-safe-bottom) + 16px)}
  .keyboard-open main{top:var(--visible-top,0px);bottom:auto;height:var(--visible-height)}
 }
 
