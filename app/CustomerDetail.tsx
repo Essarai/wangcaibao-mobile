@@ -16,7 +16,7 @@ export default function CustomerDetail({ share }: { share: boolean }) {
   const format = (value: number) => share ? `${value.toFixed(1)}%` : `${value} 人`;
   const latest = days[days.length - 1];
 
-  return <div className="customer-breakdown">
+  return <div className="customer-breakdown" tabIndex={0} role="region" aria-label={title}>
     <div className="row"><h3>{latest.date} 顾客构成</h3><small>模拟数据</small></div>
     <div className="rank"><span>老客</span><b>{latest.returning} 人</b></div>
     <div className="rank"><span>新客</span><b>{latest.newCustomers} 人</b></div>
