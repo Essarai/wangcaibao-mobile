@@ -16,16 +16,23 @@ export default function CustomerDetail({ share }: { share: boolean }) {
   const format = (value: number) => share ? `${value.toFixed(1)}%` : `${value} 人`;
   const latest = days[days.length - 1];
 
-  return <div className="customer-breakdown" tabIndex={0} role="region" aria-label={title}>
+  return <div className="customer-breakdown" role="region" aria-label={title}>
     <div className="row"><h3>{latest.date} 顾客构成</h3><small>模拟数据</small></div>
-    <div className="rank"><span>老客</span><b>{latest.returning} 人</b></div>
-    <div className="rank"><span>新客</span><b>{latest.newCustomers} 人</b></div>
-    <div className="rank"><span>身份未识别</span><b>{latest.unknown} 人</b></div>
-    <p><small>{share ? '老客占比 = 老客人数 ÷ 已识别顾客人数（84 人）。' : '同一顾客当天多次下单只计 1 人。'}</small></p>
-    <h3>近七日{title}</h3>
-    {days.map(day => <div className="comparison-bar" key={day.date}>
-      <div className="row"><span>{day.date}</span><b>{format(metric(day))}</b></div>
-      <div className="track" aria-hidden="true"><span style={{width: `${metric(day)}%`}} /></div>
-    </div>)}
+    <div className="customer-summary">
+      <div><small>老客</small><b>{latest.returning} 人</b></div>
+      <div><small>新客</small><b>{latest.newCustomers} 人</b></div>
+      <div><small>身份未识别</small><b>{latest.unknown} 人</b></div>
+    </div>
+    <div>
+      <h3>近七日{title}</h3>
+      <div className="customer-trend">
+        {days.map(day => <div className="customer-day" key={day.date}>
+          <b>{format(metric(day))}</b>
+          <div className="customer-bar" aria-hidden="true"><span style={{height: metric(day) + "%"}} /></div>
+          <small>{day.date}</small>
+        </div>)}
+      </div>
+    </div>
+    <small>{share ? '老客占比按已识别的 84 人计算。' : '同一顾客当天多次下单只计 1 人。'}</small>
   </div>;
 }

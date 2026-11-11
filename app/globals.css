@@ -204,4 +204,12 @@ footer>small{margin-top:8px;font-size:11px;line-height:15px}
 
 .portrait-content{position:relative;display:flow-root}
 .portrait-rank-hidden{visibility:hidden}
-.customer-breakdown{position:absolute;inset:0;overflow-y:auto;overscroll-behavior:contain;padding-top:16px}
+.customer-breakdown{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding-top:16px}
+.customer-summary,.customer-trend{display:grid;gap:4px}
+.customer-summary{grid-template-columns:repeat(3,minmax(0,1fr));padding:10px 0;background:#faf6f6;border-radius:10px;text-align:center}
+.customer-summary b{display:block;margin-top:4px;font-size:15px}
+.customer-trend{grid-template-columns:repeat(7,minmax(0,1fr));margin-top:8px}
+.customer-day{text-align:center;white-space:nowrap;font-size:11px}
+.customer-day small{font-size:10px}
+.customer-bar{height:48px;display:flex;align-items:flex-end;justify-content:center;margin:3px 0;border-bottom:1px solid #f3eeee}
+.customer-bar span{width:52%;background:#ff5359;border-radius:4px 4px 0 0}
