@@ -201,3 +201,7 @@ footer>small{margin-top:8px;font-size:11px;line-height:15px}
 .phone.welcome .welcomecontent{background:#f9e9ee url('../public/assets/welcome-background.png') center -210px/100% 874px no-repeat;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
 .phone.welcome .welcomecontent:before{content:'';position:absolute;inset:0;pointer-events:none;background:rgba(255,255,255,.06);backdrop-filter:blur(12px) saturate(105%);-webkit-backdrop-filter:blur(12px) saturate(105%);z-index:-1}
 .phone.welcome .welcomecontent article{background:rgba(255,255,255,.72);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+
+.customer-detail-spacer{width:46px;flex-shrink:0}
+.customer-detail{flex:1;min-height:0}
+.customer-detail .amount{margin:12px 0 6px}
