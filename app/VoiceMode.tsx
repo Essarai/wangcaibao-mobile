@@ -109,10 +109,10 @@ export default function VoiceMode({onClose, onAsk}: {
     }
   }
 
-  const status = {idle: '点麦克风，说说你想了解什么', starting: '正在开启麦克风…', listening: '正在聆听…', speaking: '旺小财正在回答'}[phase];
+  const status = {idle: '点麦克风，说说你想了解什么', starting: '正在开启麦克风…', listening: '正在聆听…', speaking: '财掌柜正在回答'}[phase];
 
-  return <section className="voice-mode" aria-label="旺小财语音对话">
-    <div className="voice-heading">旺小财</div>
+  return <section className="voice-mode" aria-label="财掌柜语音对话">
+    <div className="voice-heading">财掌柜</div>
     <div className="voice-stage">
       <div className="voice-orb" data-phase={phase} aria-hidden="true" />
       <div className="voice-caption" aria-live="polite">
