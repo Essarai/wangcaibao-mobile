@@ -1,4 +1,4 @@
-import {growth, priorHour, receiptMoney, receiptTime, receiptWindow, receiptsToday} from './receipt-window';
+import {growth, priorHour, receiptMoney, receiptTime, receiptWindow, receiptsToday, tradingHours, tradingPeriods} from './receipt-window';
 import TrendChart from './TrendChart';
 
 export type Kind = 'summary'|'hour'|'hourCompare'|'trend'|'time'|'compare'|'advice'|'unknown';
@@ -97,11 +97,14 @@ export function answerLead(kind: Kind, context: Kind, now: number) {
   if (kind === 'compare') return comparison(today, yesterday, '比昨天同时段');
   if (kind === 'trend') return '近七个完整日共收款 ' + money(history.reduce((sum, day) => sum + day.cents, 0)) + '。今天截至 ' + time(today.end) + '，收款 ' + money(today.cents) + '。';
   if (kind === 'time') {
-    const complete = today.buckets.filter(bucket => bucket.to - bucket.from === 60);
+    const periods = tradingPeriods(today);
+    if (!periods.length) return '今天还没有可统计的营业时段。';
+    if (!today.count) return '今天截至 ' + time(today.end) + '，营业时段内暂无成功收款。';
+    const complete = periods.filter(period => period.to === period.scheduledEnd);
     const mostMoney = peak(complete, 'cents');
     const mostOrders = peak(complete, 'count');
-    if (!mostMoney || !mostOrders) return '今天暂时没有可排序的完整小时收款。';
-    return '金额最高的是 ' + span(mostMoney.from, mostMoney.to) + '（' + money(mostMoney.cents) + '），笔数最多的是 ' + span(mostOrders.from, mostOrders.to) + '（' + mostOrders.count + ' 笔）。';
+    if (!mostMoney || !mostOrders) return '截至 ' + time(today.end) + '，今天营业时段内已收款 ' + money(today.cents) + '、' + today.count + ' 笔。等首个时段结束后再比较。';
+    return '已结束的时段里，' + span(mostMoney.from, mostMoney.to) + ' 收款最高（' + money(mostMoney.cents) + '），' + span(mostOrders.from, mostOrders.to) + ' 付款笔数最多（' + mostOrders.count + ' 笔）。';
   }
   if (kind === 'summary') return '今天截至 ' + time(today.end) + '，成功收款 ' + money(today.cents) + '，共 ' + today.count + ' 笔。';
   return '目前可以分析收款趋势、时段和经营对比。这个问题暂时没有对应的演示数据。';
@@ -138,7 +141,14 @@ export function AnswerCards({kind,context,onAsk,now}: {kind:Kind;context:Kind;on
     </>}
     {kind === 'summary' && <><h4>今日有收款的时段</h4><BucketRows buckets={today.buckets.filter(bucket => bucket.count)}/></>}
     {kind === 'trend' && <><h4>近七个完整日 · 元</h4><TrendChart days={history} interactive/><p className="explanation">今日截至 {time(today.end)} · {money(today.cents)}</p></>}
-    {kind === 'time' && <><h4>各时段收款与笔数</h4><BucketRows buckets={today.buckets.filter(bucket => bucket.count)}/><p className="explanation">最高时段只在完整小时中比较。支付笔数可辅助判断收银忙闲，现场排队需另行观察。</p></>}
+    {kind === 'time' && <>
+      <p className="explanation">统计口径 · 北京时间 {receiptTime(today.end)} 截止。营业时间 {tradingHours}，按支付成功时间统计收款金额和付款笔数，退款不抵扣。演示数据。</p>
+      <h4>营业时段收款</h4>
+      {tradingPeriods(today).map(period => <div className="rank" key={period.from}>
+        <span>{period.label} {span(period.from, period.to)}{period.to < period.scheduledEnd ? '（进行中）' : ''} · {period.count} 笔</span>
+        <em>{money(period.cents)}</em>
+      </div>)}
+    </>}
     {(kind === 'compare' || kind === 'hourCompare') && <>
       <h4>{hourly ? '昨天同一小时' : '截至 ' + time(today.end) + ' 的同时段对比'}</h4>
       <table><thead><tr><th>指标</th><th>本期</th><th>昨日</th></tr></thead><tbody>

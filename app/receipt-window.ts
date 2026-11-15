@@ -18,12 +18,15 @@ function sample(minute: number, salt: number) {
 
 const dayMinutes = 1440;
 const shanghaiOffset = 480;
+const openingHour = 7;
+const closingHour = 23;
 
 function transactions(start: number, end: number) {
   const rows: {minute: number; cents: number}[] = [];
   for (let minute = start; minute < end; minute++) {
     const hour = Math.floor(((minute + shanghaiOffset) % dayMinutes) / 60);
-    const chance = hour >= 7 && hour < 23 ? (hour === 12 || hour === 18 ? 68 : 47) : 4;
+    if (hour < openingHour || hour >= closingHour) continue;
+    const chance = hour === 12 || hour === 18 ? 68 : 47;
     if (sample(minute, 1) % 100 >= chance) continue;
     const size = 1 + Number(sample(minute, 2) % 7 === 0);
     for (let order = 0; order < size; order++) {
@@ -71,6 +74,20 @@ export function receiptsToday(now = Date.now()) {
     }),
   };
 }
+
+export function tradingPeriods(today: ReturnType<typeof receiptsToday>['today']) {
+  const labels = ['上午', '午间', '下午', '晚间'];
+  const duration = (closingHour - openingHour) * 60 / labels.length;
+  return labels.flatMap((label, index) => {
+    const from = today.start + openingHour * 60 + index * duration;
+    if (from >= today.end) return [];
+    const scheduledEnd = from + duration;
+    const to = Math.min(today.end, scheduledEnd);
+    return [{label, from, to, scheduledEnd, ...totals(today.rows.filter(row => row.minute >= from && row.minute < to))}];
+  });
+}
+
+export const tradingHours = [openingHour, closingHour].map(hour => String(hour).padStart(2, '0') + ':00').join('–');
 
 export function growth(current: number, previous: number) {
   if (!previous) return '—';
