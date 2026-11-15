@@ -264,3 +264,13 @@ footer>small{margin-top:8px;font-size:11px;line-height:15px}
 .voice-demo{font-size:13px;color:#505a71}
 .voice-demo:disabled{opacity:.45}
 .voice-exit{background:#1b1d24;color:white;font-size:30px;font-weight:400;line-height:1}
+
+.assistant-welcome{min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px 0 48px;text-align:center}
+.assistant-mark{display:grid;place-items:center;width:100px;height:100px;border-radius:32px;background:radial-gradient(ellipse at 40% 30%,#fff 12%,#fff3ec 60%,#f9dfd5);border:1px solid #fff;box-shadow:0 10px 30px #b9583c16}
+.assistant-mark img{width:84px;height:84px;object-fit:contain}
+.assistant-welcome h2{margin:22px 0 7px;font-size:26px;line-height:1.25;letter-spacing:-.65px;color:#292221}
+.assistant-welcome p{margin:0;font-size:14px;color:#6a605f;line-height:1.65}
+.assistant-welcome button{display:flex;align-items:center;gap:9px;min-height:44px;margin-top:23px;padding:0 15px;border:1px solid #ecdcd5;border-radius:22px;background:#fff;color:#673526;font-size:14px;font-weight:600}
+.assistant-welcome button span{margin-left:5px}
+.advice-steps .advice-evidence{padding:10px 12px;background:#fff5ee;border-radius:10px}
+.advice-steps h4{padding-top:12px;margin:12px 0 6px}
