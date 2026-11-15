@@ -24,7 +24,7 @@ export default function ReceiptsCard({onOpen, icon}: {onOpen: () => void; icon: 
   return <button
     type="button"
     className="receipts-card"
-    aria-label="看看今天的收款"
+    aria-label="最近一小时收款"
     data-dragging={dragging}
     data-exiting={direction !== 0}
     style={{transform: `translateX(${direction ? direction * 330 : offset}px) rotate(${direction ? direction * 12 : offset / 16}deg)`}}
@@ -56,7 +56,7 @@ export default function ReceiptsCard({onOpen, icon}: {onOpen: () => void; icon: 
     }}
   >
     <img className="topic-icon" src={icon} alt="" draggable={false}/>
-    <span>看看今天的收款<small>左右轻刷或点按</small></span>
+    <span>最近一小时收款<small>左右轻刷或点按</small></span>
     <span className="receipts-arrow" aria-hidden="true">→</span>
   </button>;
 }

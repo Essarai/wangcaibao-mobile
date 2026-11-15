@@ -1,7 +1,9 @@
+import {receiptMoney, type receiptWindow} from './receipt-window';
 import TrendChart from './TrendChart';
-export type Kind='summary'|'trend'|'time'|'compare'|'advice'|'unknown';
+export type Kind='summary'|'hour'|'trend'|'time'|'compare'|'advice'|'unknown';
 export function classify(q:string,previous:Kind='summary'):Kind{
  if(/建议|改善|怎么做|原因|提升|优化/.test(q))return 'advice';
+ if(/最近一小时|近一小时|最近60分钟|过去一小时/.test(q))return 'hour';
  if(/趋势|走势|七天|7天|一周/.test(q))return 'trend';
  if(/时段|几点|高峰|最多|小时/.test(q))return 'time';
  if(/对比|比较|昨日|昨天|上周|增长/.test(q))return 'compare';
@@ -9,7 +11,7 @@ export function classify(q:string,previous:Kind='summary'):Kind{
  if(/继续|详细|展开/.test(q))return previous;
  return 'unknown';
 }
-export const intros:Record<Kind,string>={summary:'截至16:30，今天成功收款 ¥3,680.00，共 80 笔。较昨日同时段增长 +15.0%。',trend:'10月21日—27日成功收款 ¥25,820.00。今天仅统计至16:30，不宜直接与历史全天比较。',time:'今天截至16:30，14:00时段收款最高（¥524.29）。这代表收款发生时间，不能直接推断顾客到店时间。',compare:'今天截至16:30收款 ¥3,680.00，昨日同时段 ¥3,200.00，变化 +15.0%，对比采用相同截止时刻。',advice:'明天下午先看 14 点的收银排队，再决定要不要加人。',unknown:'目前我可以帮你分析收款趋势、时段贡献、经营对比和经营建议。这个问题暂时没有对应的演示数据，请选择下方主题继续。'};
+export const intros:Record<Kind,string>={hour:'',summary:'截至16:30，今天成功收款 ¥3,680.00，共 80 笔。较昨日同时段增长 +15.0%。',trend:'10月21日—27日成功收款 ¥25,820.00。今天仅统计至16:30，不宜直接与历史全天比较。',time:'今天截至16:30，14:00时段收款最高（¥524.29）。这代表收款发生时间，不能直接推断顾客到店时间。',compare:'今天截至16:30收款 ¥3,680.00，昨日同时段 ¥3,200.00，变化 +15.0%，对比采用相同截止时刻。',advice:'明天下午先看 14 点的收银排队，再决定要不要加人。',unknown:'目前我可以帮你分析收款趋势、时段贡献、经营对比和经营建议。这个问题暂时没有对应的演示数据，请选择下方主题继续。'};
 const advicePlans = {
   time: {
     lead: intros.advice,
@@ -36,8 +38,16 @@ export function advicePlan(context?: Kind) {
   return advicePlans.time;
 }
 
-export const followups:Record<Kind,string[]>={summary:['今天哪个时段收款最多？','经营对比'],trend:['经营对比','趋势变化原因与改善建议'],time:['高峰时段如何改善','收款趋势'],compare:['变化原因与改善建议','时段分析'],advice:['经营对比','收款趋势'],unknown:['收款趋势','时段分析']};
-export function AnswerCards({kind,context,onAsk}:{kind:Kind;context?:Kind;onAsk:(q:string)=>void}){return <div className="answer-cards">
+export const followups:Record<Kind,string[]>={hour:['刷新最近一小时收款'],summary:['今天哪个时段收款最多？','经营对比'],trend:['经营对比','趋势变化原因与改善建议'],time:['高峰时段如何改善','收款趋势'],compare:['变化原因与改善建议','时段分析'],advice:['经营对比','收款趋势'],unknown:['收款趋势','时段分析']};
+export function AnswerCards({kind,context,onAsk,receipts}:{kind:Kind;context?:Kind;onAsk:(q:string)=>void;receipts?:ReturnType<typeof receiptWindow>}){return <div className="answer-cards">
+{kind==='hour'&&receipts&&<>
+  <p className="explanation">{receipts.start} – {receipts.end} · 北京时间 · 演示数据</p>
+  <h4>每 15 分钟收款</h4>
+  {receipts.buckets.map(bucket=><div className="rank" key={bucket.start}>
+    <span>{bucket.start.slice(-5)}–{bucket.end.slice(-5)} · {bucket.count} 笔</span>
+    <em>¥ {receiptMoney(bucket.cents)}</em>
+  </div>)}
+</>}
 {kind==='summary'&&<><h4>时段贡献排行</h4>{[['9:00—12:00','¥ 1,840.00'],['12:00—15:00','¥ 1,240.00'],['15:00—18:00','¥ 600.00'],['18:00—23:59','未发生交易']].map(([label,value],i)=><div className="rank" key={label}><span>{i+1}　{label}</span><em>{value}</em></div>)}</>}
 {kind==='trend'&&<><div className="metrics"><div>收款笔数<strong>80</strong><small>今日截至16:30</small></div><div>笔均金额（元）<strong>46</strong><small>成功收款口径</small></div></div><h4>收款走势</h4><TrendChart/><p className="explanation">10/21～10/26，日收款从 ¥2,680.00 升至 ¥4,600.00，变化 +71.6%。最高为10/26。虚线表示今天未完结的数据。</p></>}
 {kind==='time'&&<><h4>小时收款分布</h4><div className="hour-bars">{[120,210,360,445,385,460,430,524.29,390,355.71].map((v,i)=><div key={i} title={`${i+7}:00 ¥${v}`}><div style={{height:v/5}} className={i===7?'peak':''}/><small>{i+7}时</small></div>)}</div><div className="insight"><b>14:00　¥524.29</b><p>当前最高收款小时。16时数据仅统计到16:30，不能直接与完整小时比较。</p></div></>}
