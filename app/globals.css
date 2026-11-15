@@ -274,3 +274,10 @@ footer>small{margin-top:8px;font-size:11px;line-height:15px}
 .assistant-welcome button span{margin-left:5px}
 .advice-steps .advice-evidence{padding:10px 12px;background:#fff5ee;border-radius:10px}
 .advice-steps h4{padding-top:12px;margin:12px 0 6px}
+
+.assistant-welcome .receipts-card{width:min(100%,260px);min-height:66px;gap:12px;padding:0 17px;border-radius:16px;text-align:left;touch-action:pan-y;user-select:none;cursor:grab;box-shadow:0 5px 0 #f5e6df,0 12px 24px #b9583c15;transition:transform .26s cubic-bezier(.2,.75,.3,1),opacity .22s ease}
+.receipts-card[data-dragging=true]{transition:none;cursor:grabbing}
+.receipts-card[data-exiting=true]{opacity:0;pointer-events:none}
+.assistant-welcome .receipts-card span{margin-left:0}
+.receipts-card small{display:block;margin-top:3px;font-size:11px;font-weight:400;color:#736765}
+.assistant-welcome .receipts-arrow{margin-left:auto;color:#a94730}
