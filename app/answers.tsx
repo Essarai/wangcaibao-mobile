@@ -137,7 +137,7 @@ export function AnswerCards({kind,context,onAsk,now}: {kind:Kind;context:Kind;on
       {kind === 'hour' && <><h4>每 15 分钟收款</h4><BucketRows buckets={latest.buckets}/></>}
     </>}
     {kind === 'summary' && <><h4>今日有收款的时段</h4><BucketRows buckets={today.buckets.filter(bucket => bucket.count)}/></>}
-    {kind === 'trend' && <><h4>近七个完整日 · 元</h4><TrendChart days={history}/><p className="explanation">今日截至 {time(today.end)} · {money(today.cents)}</p></>}
+    {kind === 'trend' && <><h4>近七个完整日 · 元</h4><TrendChart days={history} interactive/><p className="explanation">今日截至 {time(today.end)} · {money(today.cents)}</p></>}
     {kind === 'time' && <><h4>各时段收款与笔数</h4><BucketRows buckets={today.buckets.filter(bucket => bucket.count)}/><p className="explanation">最高时段只在完整小时中比较。支付笔数可辅助判断收银忙闲，现场排队需另行观察。</p></>}
     {(kind === 'compare' || kind === 'hourCompare') && <>
       <h4>{hourly ? '昨天同一小时' : '截至 ' + time(today.end) + ' 的同时段对比'}</h4>

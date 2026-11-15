@@ -281,3 +281,6 @@ footer>small{margin-top:8px;font-size:11px;line-height:15px}
 .assistant-welcome .receipts-card span{margin-left:0}
 .receipts-card small{display:block;margin-top:3px;font-size:11px;font-weight:400;color:#736765}
 .assistant-welcome .receipts-arrow{margin-left:auto;color:#a94730}
+
+.receipt-trend .trend-value{padding:4px 0;color:#bd392f;font-size:12px;font-variant-numeric:tabular-nums}
+.receipt-trend .trend-value[aria-pressed=true]{font-weight:700;text-decoration:underline}
